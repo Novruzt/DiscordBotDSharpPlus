@@ -2,6 +2,7 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
 using FIrstDiscordBotC_.Commands;
 using FIrstDiscordBotC_.Config;
@@ -16,8 +17,8 @@ namespace FIrstDiscordBotC_
 {
     internal class Program
     {
-        private static DiscordClient Client;
-        private static CommandsNextExtension Commands;
+        public static DiscordClient Client;
+        public static CommandsNextExtension Commands;
         static async Task Main(string[] args)
         {
             JsonReader jsonReader = new JsonReader();  
@@ -35,7 +36,8 @@ namespace FIrstDiscordBotC_
 
             Client.UseInteractivity(new InteractivityConfiguration
             {
-                Timeout = TimeSpan.FromMinutes(1)
+                PollBehaviour = PollBehaviour.KeepEmojis,
+                Timeout = TimeSpan.FromMinutes(1)  //Timeout for Commands Interactivity.
             });
 
             Client.Ready += Client_Ready;
@@ -53,6 +55,7 @@ namespace FIrstDiscordBotC_
             Commands = Client.UseCommandsNext(commandConfig);
 
             Commands.RegisterCommands<TestCommands>();
+            Commands.RegisterCommands<InteractionCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1); //To keep but running forever if project is running.
