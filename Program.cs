@@ -6,10 +6,6 @@ using DSharpPlus.Interactivity.Extensions;
 using FIrstDiscordBotC_.Commands;
 using FIrstDiscordBotC_.Config;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FIrstDiscordBotC_
@@ -39,8 +35,6 @@ namespace FIrstDiscordBotC_
             });
 
             Client.Ready += Client_Ready;
-
-            
 
             CommandsNextConfiguration commandConfig= new CommandsNextConfiguration()
             {
