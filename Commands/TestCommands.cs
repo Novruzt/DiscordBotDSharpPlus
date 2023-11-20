@@ -13,6 +13,7 @@ namespace FIrstDiscordBotC_.Commands
     public class TestCommands:BaseCommandModule 
     {
         [Command("Test")]
+        [Cooldown(1, 30, CooldownBucketType.Guild)]
         public async Task TestCommand(CommandContext context)
         {
             await context.Channel.SendMessageAsync($"Hello, {context.User.Username}. ");
