@@ -146,13 +146,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotExtensions\WelcomeWaiter.cs" />
-    <Compile Include="Commands\InteractionCommands.cs" />
-    <Compile Include="Commands\TestCommands.cs" />
+    <Compile Include="Commands\PrefixCommands\InteractionCommands.cs" />
+    <Compile Include="Commands\PrefixCommands\TestCommands.cs" />
+    <Compile Include="Commands\SlashCommands\TestSlashCommands.cs" />
     <Compile Include="Configurations\GlobalExceptionHandler.cs" />
     <Compile Include="Config\JsonReader.cs" />
-    <Compile Include="Exceptions\CommandCooldownException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
-    <Compile Include="Others\CardSystem.cs" />
+    <Compile Include="Utils\CardSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -161,6 +161,7 @@
     <None Include="Config\Config.json" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

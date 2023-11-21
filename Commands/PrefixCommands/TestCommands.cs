@@ -83,8 +83,6 @@ namespace FIrstDiscordBotC_.Commands
                     Color = DiscordColor.Orange
                 };
             }
-
         }
-
     }
 }

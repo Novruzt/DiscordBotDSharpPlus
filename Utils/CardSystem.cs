@@ -6,10 +6,9 @@ namespace FIrstDiscordBotC_.Others
     {
         private int[] CardNumbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
         private string[] CardSuits = { "Clubs", "Spades", "Diamonds", "Hearts"};
-        
+
         public int SelectedNumber { get; set; } 
         public string SelectedCard { get; set; }
-
         public CardSystem()
         {
               Random random = new Random();
