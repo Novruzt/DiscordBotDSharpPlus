@@ -20,10 +20,8 @@ namespace FIrstDiscordBotC_.Configurations
         {
             _args = args;
         }
-
         public async Task<DiscordMessage> HandleErrors()
         {
-            
             if(_args != null ) 
             {
                 if (_args.Exception is ChecksFailedException exception)

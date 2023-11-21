@@ -6,8 +6,10 @@ using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.SlashCommands;
 using FIrstDiscordBotC_.BotExtensions;
 using FIrstDiscordBotC_.Commands;
+using FIrstDiscordBotC_.Commands.SlashCommands;
 using FIrstDiscordBotC_.Config;
 using FIrstDiscordBotC_.Configurations;
 using System;
@@ -28,7 +30,7 @@ namespace FIrstDiscordBotC_
             {
                 Intents = DiscordIntents.All,
                 Token = jsonReader.Token,
-                TokenType = TokenType.Bot,
+                TokenType = TokenType.Bot, 
                 AutoReconnect = true
             };
 
@@ -43,8 +45,6 @@ namespace FIrstDiscordBotC_
             //Event registrations for Client
             Client.Ready += Client_Ready;
             Client.MessageCreated += MessageCreateHandler;
-            
-
 
             CommandsNextConfiguration commandConfig= new CommandsNextConfiguration()
             {
@@ -58,10 +58,12 @@ namespace FIrstDiscordBotC_
             Commands = Client.UseCommandsNext(commandConfig);
             Commands.CommandErrored += CommandErrorHandler;
 
-
             //Register commands classes to Commands.
             Commands.RegisterCommands<TestCommands>();
             Commands.RegisterCommands<InteractionCommands>();
+
+            SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); //Slash command extension.
+            slashCommandsConfig.RegisterCommands<TestSlashCommands>(784733575936737301); //GUILD(Server) Id.
 
             await Client.ConnectAsync();
             await Task.Delay(-1); //To keep but running forever if project is running.
