@@ -145,6 +145,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotExtensions\ButtonHandler.cs" />
     <Compile Include="BotExtensions\WelcomeWaiter.cs" />
     <Compile Include="Commands\PrefixCommands\InteractionCommands.cs" />
     <Compile Include="Commands\PrefixCommands\TestCommands.cs" />
