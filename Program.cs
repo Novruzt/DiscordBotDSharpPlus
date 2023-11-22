@@ -2,6 +2,7 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
@@ -45,6 +46,7 @@ namespace FIrstDiscordBotC_
             //Event registrations for Client
             Client.Ready += Client_Ready;
             Client.MessageCreated += MessageCreateHandler;
+            Client.ComponentInteractionCreated += ButtonPressHandler;
 
             CommandsNextConfiguration commandConfig= new CommandsNextConfiguration()
             {
@@ -62,18 +64,23 @@ namespace FIrstDiscordBotC_
             Commands.RegisterCommands<TestCommands>();
             Commands.RegisterCommands<InteractionCommands>();
 
-            SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); //Slash command extension.
+            //Register slash commands
+            SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
             slashCommandsConfig.RegisterCommands<TestSlashCommands>(784733575936737301); //GUILD(Server) Id.
 
             await Client.ConnectAsync();
-            await Task.Delay(-1); //To keep but running forever if project is running.
+            await Task.Delay(-1); //To keep bot running forever if project is running.
+        }
 
+        private static async Task ButtonPressHandler(DiscordClient sender, ComponentInteractionCreateEventArgs args)
+        {
+            await args.HandleButtons(); //Handling all buttons' interactions.
         }
 
         private static async Task CommandErrorHandler(CommandsNextExtension sender, CommandErrorEventArgs args)
         {
             GlobalExceptionHandler handler = new GlobalExceptionHandler(args);
-             await handler.HandleErrors(); //Handling all errors and exceptions for commands.
+            await handler.HandleErrors(); //Handling all errors and exceptions for commands.
         }
 
         private static async Task MessageCreateHandler(DiscordClient sender, MessageCreateEventArgs args)
@@ -83,7 +90,7 @@ namespace FIrstDiscordBotC_
 
         private static Task Client_Ready(DiscordClient sender, ReadyEventArgs args)
         {
-            return Task.CompletedTask;
+            return Task.CompletedTask; 
         }
     }
 }

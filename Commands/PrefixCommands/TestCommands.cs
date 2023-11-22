@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using FIrstDiscordBotC_.Others;
@@ -83,6 +84,41 @@ namespace FIrstDiscordBotC_.Commands
                     Color = DiscordColor.Orange
                 };
             }
+        }
+
+        [Command("Button")]
+        public async Task ButtonTest(CommandContext context)
+        {
+            DiscordButtonComponent buttonComponent1 = new DiscordButtonComponent(ButtonStyle.Success, "Test-1", "Button 1");
+            DiscordButtonComponent buttonComponent2 = new DiscordButtonComponent(ButtonStyle.Danger, "Test-2", "Button 2");
+            DiscordButtonComponent buttonComponent3 = new DiscordButtonComponent(ButtonStyle.Primary, "Test-3", "Button 3");
+            DiscordButtonComponent buttonComponent4 = new DiscordButtonComponent(ButtonStyle.Secondary, "Test-4", "Button 4");
+            
+            DiscordMessageBuilder messageBuilder = new DiscordMessageBuilder().AddEmbed(new DiscordEmbedBuilder()
+                                                        .WithTitle("Message with button")
+                                                        .WithColor(DiscordColor.White)
+                                                        .WithDescription("Click button to continue."))
+                                                        .AddComponents(buttonComponent1, buttonComponent2, buttonComponent3, buttonComponent4);
+
+            await context.Channel.SendMessageAsync(messageBuilder);
+        }
+
+        [Command("Help")]
+        public async Task HelpCommand(CommandContext context)
+        {
+            DiscordButtonComponent funButton = new DiscordButtonComponent(ButtonStyle.Primary, "HelpButtonFun", "Fun");
+            DiscordButtonComponent modButton = new DiscordButtonComponent(ButtonStyle.Primary, "HelpButtonMod", "Moderation");
+            DiscordButtonComponent voiceButton = new DiscordButtonComponent(ButtonStyle.Primary, "HelpButtonVoice", "Voice");
+            DiscordButtonComponent exitButton = new DiscordButtonComponent(ButtonStyle.Danger, "HelpButtonExit", "Exit");
+
+            DiscordMessageBuilder helpMessage = new DiscordMessageBuilder()
+                                                 .AddEmbed(new DiscordEmbedBuilder()
+                                                 .WithColor(DiscordColor.White)
+                                                 .WithTitle("Help Menu")
+                                                 .WithDescription("Please click button for more information."))
+                                                 .AddComponents(funButton, modButton, voiceButton, exitButton);
+            
+            await context.Channel.SendMessageAsync(helpMessage);
         }
     }
 }
