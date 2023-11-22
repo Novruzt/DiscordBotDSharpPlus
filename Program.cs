@@ -79,8 +79,7 @@ namespace FIrstDiscordBotC_
 
         private static async Task CommandErrorHandler(CommandsNextExtension sender, CommandErrorEventArgs args)
         {
-            GlobalExceptionHandler handler = new GlobalExceptionHandler(args);
-            await handler.HandleErrors(); //Handling all errors and exceptions for commands.
+            await args.HandleErrors(); //Handling all errors and exceptions for commands.
         }
 
         private static async Task MessageCreateHandler(DiscordClient sender, MessageCreateEventArgs args)
