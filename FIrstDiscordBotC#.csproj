@@ -149,9 +149,11 @@
     <Compile Include="BotExtensions\WelcomeWaiter.cs" />
     <Compile Include="Commands\PrefixCommands\InteractionCommands.cs" />
     <Compile Include="Commands\PrefixCommands\TestCommands.cs" />
+    <Compile Include="Commands\SlashCommands\ModerationSlashCommands.cs" />
     <Compile Include="Commands\SlashCommands\TestSlashCommands.cs" />
     <Compile Include="Configurations\GlobalExceptionHandler.cs" />
     <Compile Include="Config\JsonReader.cs" />
+    <Compile Include="Exceptions\HierarchyException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
     <Compile Include="Utils\CardSystem.cs" />
     <Compile Include="Program.cs" />

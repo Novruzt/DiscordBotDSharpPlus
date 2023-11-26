@@ -20,8 +20,6 @@ namespace FIrstDiscordBotC_.BotExtensions
         }
         private static async Task<DiscordMessage> HandleHelpButtons(ComponentInteractionCreateEventArgs args)
         {
-            
-
             if(args.Interaction.Data.CustomId == "HelpButtonFun")
                 await args.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
                                                                                                  .WithContent("Fun Commands"));
@@ -44,10 +42,9 @@ namespace FIrstDiscordBotC_.BotExtensions
         {
             
             if (args.Interaction.Data.CustomId == "Test-1")
-            {
                 await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder()
                                                                                                   .WithContent("You Pressed the 1st button"));
-            }
+
             else await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder()
                                                                                                   .WithContent("You Pressed the one of the other buttons"));
             return null;

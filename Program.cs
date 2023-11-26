@@ -8,6 +8,7 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.EventArgs;
 using FIrstDiscordBotC_.BotExtensions;
 using FIrstDiscordBotC_.Commands;
 using FIrstDiscordBotC_.Commands.SlashCommands;
@@ -67,9 +68,16 @@ namespace FIrstDiscordBotC_
             //Register slash commands
             SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
             slashCommandsConfig.RegisterCommands<TestSlashCommands>(784733575936737301); //GUILD(Server) Id.
+            slashCommandsConfig.RegisterCommands<ModerationSlashCommands>(784733575936737301);
+            slashCommandsConfig.SlashCommandErrored += SlashCommandError;
 
             await Client.ConnectAsync();
             await Task.Delay(-1); //To keep bot running forever if project is running.
+        }
+
+        private static async Task SlashCommandError(SlashCommandsExtension sender, SlashCommandErrorEventArgs args)
+        {
+            await args.HandleErrors();  //Handling all error and exceptions for slash commands.
         }
 
         private static async Task ButtonPressHandler(DiscordClient sender, ComponentInteractionCreateEventArgs args)
