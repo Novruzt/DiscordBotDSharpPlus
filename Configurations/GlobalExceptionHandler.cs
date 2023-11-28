@@ -48,7 +48,7 @@ namespace FIrstDiscordBotC_.Configurations
 
         public static async Task HandleErrors(this SlashCommandErrorEventArgs args)
         {
-            if (args != null)
+            if (args != null &&args.Exception!=null)
             {
                 if (args.Exception is SlashExecutionChecksFailedException exception)
                 {
@@ -61,6 +61,21 @@ namespace FIrstDiscordBotC_.Configurations
 
                 if (args.Exception is HierarchyException hierarchyException)
                    await HierarchyError(args);
+                if(args.Exception is NotMutedException notMutedException)
+                    await NotMutedError(args);  
+                if(args.Exception is DefaultException defaultException)
+                    await DefaultError(args);
+     
+                DiscordChannel channel = args.Context.Guild.GetChannel(784733575936737304);
+                DiscordEmbedBuilder logBuilder = new DiscordEmbedBuilder()
+                {
+                    Title= "Failed log message.",
+                    Description = "Failed command: "+args.Context.CommandName+"\n"
+                    +"User: "+args.Context.User.Username+"\n"+"UserId: "+args.Context.User.Id,
+                    Color=DiscordColor.Red
+                };
+
+                await channel.SendMessageAsync(embed: logBuilder);
             }
         }
         private static async  Task<DiscordMessage> CooldownError(CommandErrorEventArgs args, CooldownAttribute cooldown)
@@ -103,13 +118,30 @@ namespace FIrstDiscordBotC_.Configurations
 
         private static async Task HierarchyError(SlashCommandErrorEventArgs args)
         {
-            DiscordInteractionResponseBuilder responseBuilder = new DiscordInteractionResponseBuilder()
+            DiscordWebhookBuilder webhookBuilder = new DiscordWebhookBuilder()
             {
-                IsEphemeral = true,
-                Content = "Exception: Target have higher role."
+                Content = "Exception: Target has higher role."
             };
 
-            await args.Context.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, responseBuilder);
+            await args.Context.EditResponseAsync(webhookBuilder);
+        }
+        private static async Task DefaultError(SlashCommandErrorEventArgs args)
+        {
+            DiscordWebhookBuilder webhookBuilder = new DiscordWebhookBuilder()
+            {
+                Content="Something went wrong."   
+            };
+
+            await args.Context.EditResponseAsync(webhookBuilder);
+        }
+        private static async Task NotMutedError(SlashCommandErrorEventArgs args)
+        {
+            DiscordWebhookBuilder webhookBuilder = new DiscordWebhookBuilder()
+            {
+                Content = "This user is not muted."
+            };
+
+            await args.Context.EditResponseAsync(webhookBuilder);
         }
     }
 }
