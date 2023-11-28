@@ -55,7 +55,7 @@ namespace FIrstDiscordBotC_.Commands.SlashCommands
             InteractivityExtension interactivity = Program.Client.GetInteractivity();
 
             TimeSpan pollTime;
-            bool IsSpan = time.TryParse(out pollTime);
+            bool IsSpan = TimeConverter.TryParse(time, out pollTime);
             if (!IsSpan)
             {
                 pollTime = TimeSpan.FromHours(1);

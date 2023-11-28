@@ -8,7 +8,7 @@ namespace FIrstDiscordBotC_.Extensions
 {
     public static class TimeConverter
     {
-        public static bool TryParse(this string input, out TimeSpan result)
+        public static bool TryParse(string input, out TimeSpan result)
         {
             result = TimeSpan.Zero;
 

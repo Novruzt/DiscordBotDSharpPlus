@@ -152,8 +152,10 @@
     <Compile Include="Commands\SlashCommands\ModerationSlashCommands.cs" />
     <Compile Include="Commands\SlashCommands\TestSlashCommands.cs" />
     <Compile Include="Configurations\GlobalExceptionHandler.cs" />
-    <Compile Include="Config\JsonReader.cs" />
+    <Compile Include="BotConfigs\JsonReader.cs" />
+    <Compile Include="Exceptions\DefaultException.cs" />
     <Compile Include="Exceptions\HierarchyException.cs" />
+    <Compile Include="Exceptions\NotMutedException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
     <Compile Include="Utils\CardSystem.cs" />
     <Compile Include="Program.cs" />
@@ -161,7 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config\Config.json" />
+    <None Include="BotConfigs\Config.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
