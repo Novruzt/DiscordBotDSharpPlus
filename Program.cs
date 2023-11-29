@@ -69,6 +69,7 @@ namespace FIrstDiscordBotC_
             SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
             slashCommandsConfig.RegisterCommands<TestSlashCommands>(784733575936737301); //GUILD(Server) Id.
             slashCommandsConfig.RegisterCommands<ModerationSlashCommands>(784733575936737301);
+            slashCommandsConfig.RegisterCommands<ApiSlashCommands>(784733575936737301);
             slashCommandsConfig.SlashCommandErrored += SlashCommandError;
 
             await Client.ConnectAsync();

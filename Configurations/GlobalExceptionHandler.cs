@@ -71,7 +71,8 @@ namespace FIrstDiscordBotC_.Configurations
                 {
                     Title= "Failed log message.",
                     Description = "Failed command: "+args.Context.CommandName+"\n"
-                    +"User: "+args.Context.User.Username+"\n"+"UserId: "+args.Context.User.Id,
+                    +"User: "+args.Context.User.Username+"\n"+"UserId: "+args.Context.User.Id+"\n"
+                    + "Exception: "+args.Exception.Message,
                     Color=DiscordColor.Red
                 };
 

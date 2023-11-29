@@ -5,11 +5,15 @@ using DSharpPlus.SlashCommands;
 using DSharpPlus.SlashCommands.Attributes;
 using FIrstDiscordBotC_.Exceptions;
 using FIrstDiscordBotC_.Extensions;
+using Google.Apis.CustomSearchAPI.v1.Data;
+using Google.Apis.CustomSearchAPI.v1;
+using Google.Apis.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FIrstDiscordBotC_.Config;
 
 namespace FIrstDiscordBotC_.Commands.SlashCommands
 {
