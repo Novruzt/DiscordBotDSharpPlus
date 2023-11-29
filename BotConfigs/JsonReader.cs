@@ -12,6 +12,9 @@ namespace FIrstDiscordBotC_.Config
     {
         public string Token { get; set; }
         public string Prefix { get; set; }
+        public string SearchApiKey { get; set; }
+        public string SearchCustomId { get; set; }
+        public string ChatGPTkey { get; set; }
 
         public async Task ReadJsonAsync()
         {
@@ -22,6 +25,9 @@ namespace FIrstDiscordBotC_.Config
 
                 this.Prefix = data.Prefix;
                 this.Token = data.Token;
+                this.SearchApiKey = data.SearchApiKey;
+                this.SearchCustomId = data.SearchCustomId;
+                this.ChatGPTkey=data.ChatGPTkey;
             }
         }
     }
@@ -30,5 +36,8 @@ namespace FIrstDiscordBotC_.Config
     {
         public string Token { get; set; }
         public string Prefix { get; set; }
+        public string SearchApiKey { get; set; }
+        public string SearchCustomId { get; set; }
+        public string ChatGPTkey { get; set; }
     }
 }

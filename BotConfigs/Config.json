@@ -1,4 +1,7 @@
 ﻿{
   "token": "token",
-  "prefix": "!"
+  "prefix": "!",
+  "SearchApiKey": "apiKey",
+  "SearchCustomId": "customId",
+  "ChatGPTkey": "chatgpt"
 } 
