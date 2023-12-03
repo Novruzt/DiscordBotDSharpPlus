@@ -11,9 +11,11 @@ using DSharpPlus.SlashCommands;
 using DSharpPlus.SlashCommands.EventArgs;
 using FIrstDiscordBotC_.BotExtensions;
 using FIrstDiscordBotC_.Commands;
+using FIrstDiscordBotC_.Commands.PrefixCommands;
 using FIrstDiscordBotC_.Commands.SlashCommands;
 using FIrstDiscordBotC_.Config;
 using FIrstDiscordBotC_.Configurations;
+using FIrstDiscordBotC_.Utils.LevelSystem;
 using System;
 using System.Threading.Tasks;
 
@@ -64,6 +66,7 @@ namespace FIrstDiscordBotC_
             //Register commands classes to Commands.
             Commands.RegisterCommands<TestCommands>();
             Commands.RegisterCommands<InteractionCommands>();
+            Commands.RegisterCommands<ProfileCommands>();
 
             //Register slash commands
             SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
@@ -93,7 +96,8 @@ namespace FIrstDiscordBotC_
 
         private static async Task MessageCreateHandler(DiscordClient sender, MessageCreateEventArgs args)
         {
-                await args.WelcomeMessage(); //Extension method to welcome user.
+            await args.WelcomeMessage(); //Extension method to welcome user.
+            await args.AddXp(args.Guild.Id); //Level System
         }
 
         private static Task Client_Ready(DiscordClient sender, ReadyEventArgs args)

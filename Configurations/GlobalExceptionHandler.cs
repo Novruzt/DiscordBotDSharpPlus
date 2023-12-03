@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data.Odbc;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.Remoting.Messaging;
@@ -31,7 +32,7 @@ namespace FIrstDiscordBotC_.Configurations
         */
         public static async Task HandleErrors(this CommandErrorEventArgs args)
         {
-            if(args != null ) 
+            if(args != null && args.Exception!=null) 
             {
                 if (args.Exception is ChecksFailedException exception)
                 {
@@ -39,10 +40,13 @@ namespace FIrstDiscordBotC_.Configurations
                     {
                         if (check is CooldownAttribute cooldownCheck)
                              await CooldownError(args, cooldownCheck);
-                        else if(check is RequirePermissionsAttribute requirePermissionsCheck)
+                        if(check is RequirePermissionsAttribute requirePermissionsCheck)
                             await PermissionError(args, requirePermissionsCheck);
                     }
                 }
+
+                if (args.Exception is DefaultException defaultException)
+                    await DefaultError(args);
             }
         }
 
@@ -71,7 +75,7 @@ namespace FIrstDiscordBotC_.Configurations
                 {
                     Title= "Failed log message.",
                     Description = "Failed command: "+args.Context.CommandName+"\n"
-                    +"User: "+args.Context.User.Username+"\n"+"UserId: "+args.Context.User.Id+"\n"
+                    +"User: "+args.Context.User.Username+"\n"+"UserId: "+args.Context.User.Id+"\n\n\n\n\n"
                     + "Exception: "+args.Exception.Message,
                     Color=DiscordColor.Red
                 };
@@ -99,6 +103,15 @@ namespace FIrstDiscordBotC_.Configurations
             {
                 Content = "You don't have permission to do this.\n"+
                           "Excepted permission:" +permission.Permissions.ToString()
+            };
+
+            return await args.Context.Channel.SendMessageAsync(messageBuilder);
+        }
+        private static async Task<DiscordMessage> DefaultError(CommandErrorEventArgs args)
+        {
+            DiscordMessageBuilder messageBuilder = new DiscordMessageBuilder()
+            {
+                Content = "Something went wrong."
             };
 
             return await args.Context.Channel.SendMessageAsync(messageBuilder);
