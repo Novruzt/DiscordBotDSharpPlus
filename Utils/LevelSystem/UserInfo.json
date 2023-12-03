@@ -1,0 +1,12 @@
+{
+  "userInfo": "User information storage",
+  "members": [
+    {
+      "Username": "username",
+      "AvatarUrl": "AvatarUrl",
+      "GuildID": 10000000000,
+      "XP": 0,
+      "Level": 1
+    }
+  ]
+}

@@ -184,6 +184,7 @@
     <Compile Include="BotExtensions\ButtonHandler.cs" />
     <Compile Include="BotExtensions\WelcomeWaiter.cs" />
     <Compile Include="Commands\PrefixCommands\InteractionCommands.cs" />
+    <Compile Include="Commands\PrefixCommands\ProfileCommands.cs" />
     <Compile Include="Commands\PrefixCommands\TestCommands.cs" />
     <Compile Include="Commands\SlashCommands\ApiSlashCommands.cs" />
     <Compile Include="Commands\SlashCommands\ModerationSlashCommands.cs" />
@@ -194,14 +195,17 @@
     <Compile Include="Exceptions\HierarchyException.cs" />
     <Compile Include="Exceptions\NotMutedException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
-    <Compile Include="Utils\CardSystem.cs" />
+    <Compile Include="Utils\GameSystem\CardSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\LevelSystem\DUser.cs" />
+    <Compile Include="Utils\LevelSystem\LevelHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="BotConfigs\Config.json" />
     <None Include="packages.config" />
+    <None Include="Utils\LevelSystem\UserInfo.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
