@@ -183,6 +183,7 @@
   <ItemGroup>
     <Compile Include="BotExtensions\ButtonHandler.cs" />
     <Compile Include="BotExtensions\WelcomeWaiter.cs" />
+    <Compile Include="Commands\PrefixCommands\ComponentCommands.cs" />
     <Compile Include="Commands\PrefixCommands\InteractionCommands.cs" />
     <Compile Include="Commands\PrefixCommands\ProfileCommands.cs" />
     <Compile Include="Commands\PrefixCommands\TestCommands.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="BotConfigs\JsonReader.cs" />
     <Compile Include="Exceptions\DefaultException.cs" />
     <Compile Include="Exceptions\HierarchyException.cs" />
+    <Compile Include="Exceptions\PermissionException.cs" />
     <Compile Include="Exceptions\NotMutedException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
     <Compile Include="Utils\GameSystem\CardSystem.cs" />

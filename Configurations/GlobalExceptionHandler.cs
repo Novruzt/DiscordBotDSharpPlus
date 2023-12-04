@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using DSharpPlus.SlashCommands;
 using DSharpPlus.SlashCommands.Attributes;
 using DSharpPlus.SlashCommands.EventArgs;
@@ -44,7 +45,6 @@ namespace FIrstDiscordBotC_.Configurations
                             await PermissionError(args, requirePermissionsCheck);
                     }
                 }
-
                 if (args.Exception is DefaultException defaultException)
                     await DefaultError(args);
             }
