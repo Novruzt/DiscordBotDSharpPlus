@@ -50,6 +50,7 @@ namespace FIrstDiscordBotC_
             Client.Ready += Client_Ready;
             Client.MessageCreated += MessageCreateHandler;
             Client.ComponentInteractionCreated += ButtonPressHandler;
+            Client.ClientErrored += ClientErrorHandler;
 
             CommandsNextConfiguration commandConfig= new CommandsNextConfiguration()
             {
@@ -67,6 +68,7 @@ namespace FIrstDiscordBotC_
             Commands.RegisterCommands<TestCommands>();
             Commands.RegisterCommands<InteractionCommands>();
             Commands.RegisterCommands<ProfileCommands>();
+            Commands.RegisterCommands<ComponentCommands>();
 
             //Register slash commands
             SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
@@ -79,6 +81,11 @@ namespace FIrstDiscordBotC_
             await Task.Delay(-1); //To keep bot running forever if project is running.
         }
 
+        private static Task ClientErrorHandler(DiscordClient sender, ClientErrorEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         private static async Task SlashCommandError(SlashCommandsExtension sender, SlashCommandErrorEventArgs args)
         {
             await args.HandleErrors();  //Handling all error and exceptions for slash commands.
@@ -86,7 +93,7 @@ namespace FIrstDiscordBotC_
 
         private static async Task ButtonPressHandler(DiscordClient sender, ComponentInteractionCreateEventArgs args)
         {
-            await args.HandleButtons(); //Handling all buttons' interactions.
+            await args.HandleButtons(Client); //Handling all buttons' interactions.
         }
 
         private static async Task CommandErrorHandler(CommandsNextExtension sender, CommandErrorEventArgs args)
