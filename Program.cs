@@ -43,7 +43,7 @@ namespace FIrstDiscordBotC_
             Client.UseInteractivity(new InteractivityConfiguration
             {
                 PollBehaviour = PollBehaviour.KeepEmojis,
-                Timeout = TimeSpan.FromMinutes(1)  //Timeout for Commands Interactivity.
+                Timeout = TimeSpan.FromMinutes(1)  //Timeout for Commands Interactivity.  
             });
 
             //Event registrations for Client
@@ -73,8 +73,8 @@ namespace FIrstDiscordBotC_
             //Register slash commands
             SlashCommandsExtension slashCommandsConfig = Client.UseSlashCommands(); 
             slashCommandsConfig.RegisterCommands<TestSlashCommands>(784733575936737301); //GUILD(Server) Id.
-            slashCommandsConfig.RegisterCommands<ModerationSlashCommands>(784733575936737301);
-            slashCommandsConfig.RegisterCommands<ApiSlashCommands>(784733575936737301);
+            slashCommandsConfig.RegisterCommands<ModerationSlashCommands>(784733575936737301);  //Guild server id
+            slashCommandsConfig.RegisterCommands<ApiSlashCommands>(784733575936737301);  //Guild server id
             slashCommandsConfig.SlashCommandErrored += SlashCommandError;
 
             await Client.ConnectAsync();
