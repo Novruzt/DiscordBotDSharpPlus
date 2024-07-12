@@ -10,24 +10,24 @@ namespace FIrstDiscordBotC_.Config
 {
     internal class JsonReader
     {
-        public string Token { get; set; }
-        public string Prefix { get; set; }
-        public string SearchApiKey { get; set; }
-        public string SearchCustomId { get; set; }
-        public string ChatGPTkey { get; set; }
+        public static string Token { get; set; }
+        public static string Prefix { get; set; }
+        public static string SearchApiKey { get; set; }
+        public static string SearchCustomId { get; set; }
+        public static string ChatGPTkey { get; set; }
 
-        public async Task ReadJsonAsync()
+        public static async Task ReadJsonAsync()
         {
             using (StreamReader reader = new StreamReader("config.json"))
             {
                 string json = await reader.ReadToEndAsync();
                 JsonStructure data = JsonConvert.DeserializeObject<JsonStructure>(json);    
 
-                this.Prefix = data.Prefix;
-                this.Token = data.Token;
-                this.SearchApiKey = data.SearchApiKey;
-                this.SearchCustomId = data.SearchCustomId;
-                this.ChatGPTkey=data.ChatGPTkey;
+                Prefix = data.Prefix;
+                Token = data.Token;
+                SearchApiKey = data.SearchApiKey;
+                SearchCustomId = data.SearchCustomId;
+                ChatGPTkey=data.ChatGPTkey;
             }
         }
     }

@@ -27,13 +27,12 @@ namespace FIrstDiscordBotC_
         public static CommandsNextExtension Commands;
         static async Task Main(string[] args)
         {
-            JsonReader jsonReader = new JsonReader();  
-            await jsonReader.ReadJsonAsync();
+            await JsonReader.ReadJsonAsync();
 
             DiscordConfiguration discordConfiguration = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
-                Token = jsonReader.Token,
+                Token = JsonReader.Token,
                 TokenType = TokenType.Bot, 
                 AutoReconnect = true
             };
@@ -54,7 +53,7 @@ namespace FIrstDiscordBotC_
 
             CommandsNextConfiguration commandConfig= new CommandsNextConfiguration()
             {
-                StringPrefixes=new string[] {jsonReader.Prefix},
+                StringPrefixes=new string[] {JsonReader.Prefix},
                 EnableMentionPrefix = true,
                 EnableDms=true,
                 EnableDefaultHelp = false
