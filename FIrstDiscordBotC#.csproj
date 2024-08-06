@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,6 +50,12 @@
     </Reference>
     <Reference Include="DSharpPlus.SlashCommands, Version=4.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DSharpPlus.SlashCommands.4.4.3\lib\netstandard2.0\DSharpPlus.SlashCommands.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis, Version=1.64.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.1.64.0\lib\net45\Google.Apis.dll</HintPath>
@@ -107,6 +116,7 @@
       <HintPath>packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -189,11 +199,26 @@
     <Compile Include="Commands\SlashCommands\TestSlashCommands.cs" />
     <Compile Include="Configurations\GlobalExceptionHandler.cs" />
     <Compile Include="BotConfigs\JsonReader.cs" />
+    <Compile Include="DATA\Configs\ContextManager.cs" />
+    <Compile Include="DATA\DataContext.cs" />
+    <Compile Include="DATA\Models\Common\BaseEntity.cs" />
+    <Compile Include="DATA\Models\Server.cs" />
+    <Compile Include="DATA\Models\User.cs" />
     <Compile Include="Exceptions\DefaultException.cs" />
     <Compile Include="Exceptions\HierarchyException.cs" />
     <Compile Include="Exceptions\PermissionException.cs" />
     <Compile Include="Exceptions\NotMutedException.cs" />
     <Compile Include="Extensions\TimeConverter.cs" />
+    <Compile Include="Migrations\202408061115262_İnital.cs" />
+    <Compile Include="Migrations\202408061115262_İnital.Designer.cs">
+      <DependentUpon>202408061115262_İnital.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408061125085_GuildIdConvertedToStringFromUlong.cs" />
+    <Compile Include="Migrations\202408061125085_GuildIdConvertedToStringFromUlong.Designer.cs">
+      <DependentUpon>202408061125085_GuildIdConvertedToStringFromUlong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Utils\DatabaseUtils\DbLevelHandler.cs" />
     <Compile Include="Utils\GameSystem\CardSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,7 +231,22 @@
     <None Include="packages.config" />
     <None Include="Utils\LevelSystem\UserInfo.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202408061115262_İnital.resx">
+      <DependentUpon>202408061115262_İnital.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408061125085_GuildIdConvertedToStringFromUlong.resx">
+      <DependentUpon>202408061125085_GuildIdConvertedToStringFromUlong.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>
