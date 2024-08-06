@@ -45,6 +45,7 @@ namespace FIrstDiscordBotC_.Configurations
                             await PermissionError(args, requirePermissionsCheck);
                     }
                 }
+
                 if (args.Exception is DefaultException defaultException)
                     await DefaultError(args);
             }
@@ -83,6 +84,8 @@ namespace FIrstDiscordBotC_.Configurations
                 await channel.SendMessageAsync(embed: logBuilder);
             }
         }
+
+        #region PrefixCommand
         private static async  Task<DiscordMessage> CooldownError(CommandErrorEventArgs args, CooldownAttribute cooldown)
         {
             TimeSpan remainingCooldown = cooldown.GetRemainingCooldown(args.Context);
@@ -116,7 +119,11 @@ namespace FIrstDiscordBotC_.Configurations
 
             return await args.Context.Channel.SendMessageAsync(messageBuilder);
         }
-        
+
+        #endregion
+
+        #region SlashCommands
+
         // Exceptions For Slash commands.
 
         private static async Task PermissionError(SlashCommandErrorEventArgs args, SlashRequirePermissionsAttribute permission)
@@ -157,5 +164,7 @@ namespace FIrstDiscordBotC_.Configurations
 
             await args.Context.EditResponseAsync(webhookBuilder);
         }
+
+        #endregion
     }
 }

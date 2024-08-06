@@ -22,17 +22,16 @@ namespace FIrstDiscordBotC_.Commands.SlashCommands
         {
             await context.DeferAsync();
 
-            JsonReader reader = new JsonReader();
-            await reader.ReadJsonAsync();
+            await JsonReader.ReadJsonAsync();
 
             CustomSearchAPIService searchService = new CustomSearchAPIService(new BaseClientService.Initializer()
             {
-                ApiKey = reader.SearchApiKey,
+                ApiKey = JsonReader.SearchApiKey,
                 ApplicationName = "FirstEngine"
             });
 
             CseResource.ListRequest listRequest = searchService.Cse.List();
-            listRequest.Cx = reader.SearchCustomId;
+            listRequest.Cx = JsonReader.SearchCustomId;
             listRequest.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
             listRequest.Q = search;
 
@@ -59,11 +58,10 @@ namespace FIrstDiscordBotC_.Commands.SlashCommands
         public async Task ChatGPTSlashCommand(InteractionContext context, [Option("Question", "Question for ChatGPT")] string question)
         {
             await context.DeferAsync();
+            
+            await JsonReader.ReadJsonAsync();
 
-            JsonReader reader = new JsonReader();
-            await reader.ReadJsonAsync();
-
-            OpenAIAPI api = new OpenAIAPI(reader.ChatGPTkey);
+            OpenAIAPI api = new OpenAIAPI(JsonReader.ChatGPTkey);
             Conversation chat = api.Chat.CreateConversation();
             chat.AppendSystemMessage("Ask a question");
 
